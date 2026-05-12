@@ -1,6 +1,6 @@
-export const WHATSAPP_NUMBER = "5511999999999";
+export const WHATSAPP_NUMBER = "5521993112961";
 export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-  "Olá! Vim pelo site da XOGUN e quero saber mais sobre as aulas."
+  "Olá! Vim pelo site da Dojô XOGUN e quero saber mais sobre as aulas."
 )}`;
 
 export const QUICK = [

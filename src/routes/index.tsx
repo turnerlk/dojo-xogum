@@ -93,9 +93,7 @@ function ProfessoresCard() {
               </h3>
               <p className="text-sm font-medium text-blood">{selected.role}</p>
               <p className="text-xs text-muted-foreground">{selected.rank}</p>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                {selected.bio}
-              </p>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground" dangerouslySetInnerHTML={{ __html: selected.bio }} />
               <button
                 onClick={() => setSelected(null)}
                 className="mt-5 w-full rounded-full border border-blood/40 py-2 text-xs font-semibold uppercase tracking-widest text-blood transition-colors hover:bg-blood/10"
@@ -158,9 +156,7 @@ function ProfessoresCard() {
                   <p className="mt-0.5 text-[10px] leading-tight text-blood">
                     {teacher.rank}
                   </p>
-                  <p className="mt-1 line-clamp-2 text-[9px] leading-snug text-muted-foreground">
-                    {teacher.bio}
-                  </p>
+                  <p className="mt-1 line-clamp-2 text-[9px] leading-snug text-muted-foreground" dangerouslySetInnerHTML={{ __html: teacher.bio }} />
                 </div>
               </div>
             );
@@ -195,6 +191,11 @@ function ProfessoresCard() {
 function Index() {
   const { modality } = useModality();
   const slide = useModalitySlide();
+  const [descExpanded, setDescExpanded] = useState(false);
+
+  useEffect(() => {
+    setDescExpanded(false);
+  }, [modality.id]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -217,9 +218,27 @@ function Index() {
             <h1 className="font-display text-5xl font-bold uppercase leading-[1.15] tracking-tight text-foreground md:text-7xl md:leading-[1.1]">
               {modality.tagline}
             </h1>
-            <p className="mt-6 max-w-md text-base leading-relaxed text-muted-foreground [text-wrap:balance] md:text-lg">
-              {modality.description}
-            </p>
+            {(() => {
+              const parts = modality.description.split("<br /><br />");
+              const hasMore = parts.length > 1;
+              const visible = descExpanded ? modality.description : parts[0];
+              return (
+                <>
+                  <p
+                    className="mt-6 max-w-md text-base leading-relaxed text-muted-foreground md:text-lg"
+                    dangerouslySetInnerHTML={{ __html: visible }}
+                  />
+                  {hasMore && (
+                    <button
+                      onClick={() => setDescExpanded((v: boolean) => !v)}
+                      className="mt-2 text-sm font-semibold text-blood hover:underline"
+                    >
+                      {descExpanded ? "Ler menos" : "Ler mais"}
+                    </button>
+                  )}
+                </>
+              );
+            })()}
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 to="/horarios"
@@ -277,7 +296,7 @@ function Index() {
           <div className="mt-8 flex flex-col items-center gap-4">
             <p className="text-sm text-muted-foreground">Quer saber como chegar?</p>
             <a
-              href="https://www.google.com/maps/search/?api=1&query=Pra%C3%A7a+8+de+Maio+Rocha+Miranda+Rio+de+Janeiro"
+              href="https://www.google.com/maps/place/Doj%C3%B4+Xogun/@-22.8527473,-43.3538274,18z/data=!4m6!3m5!1s0x9963c2981211ab:0x33c062449471d632!8m2!3d-22.8538027!4d-43.3520706!16s%2Fg%2F11r7v_j0fr?entry=ttu&g_ep=EgoyMDI2MDUwNi4wIKXMDSoASAFQAw%3D%3D"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-full bg-blood px-6 py-3 text-sm font-semibold uppercase tracking-wider text-blood-foreground shadow-blood transition-transform hover:scale-105"

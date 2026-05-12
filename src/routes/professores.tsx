@@ -54,7 +54,7 @@ function ProfessoresPage() {
                   <Award className="h-3 w-3 text-blood md:h-4 md:w-4" />
                   <span className="text-secondary-foreground">{t.rank}</span>
                 </div>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground md:text-base">{t.bio}</p>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground md:text-base" dangerouslySetInnerHTML={{ __html: t.bio }} />
               </div>
             </article>
           ))}
@@ -62,43 +62,38 @@ function ProfessoresPage() {
       </main>
 
       <Dialog open={!!selected} onOpenChange={(open) => !open && setSelected(null)}>
-        <DialogContent className="max-w-lg overflow-hidden border-blood/30 bg-gradient-to-b from-card via-background to-background p-0">
+        <DialogContent className="max-w-lg overflow-hidden border-border bg-card p-0">
           {selected && (
             <>
-              <div className="relative h-72 w-full overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-blood/40 via-background to-background" />
+              <div className="h-56 w-full overflow-hidden">
                 {selected.photo ? (
-                  <>
-                    <img
-                      src={selected.photo}
-                      alt={selected.name}
-                      className="absolute inset-0 h-full w-full object-cover object-top opacity-90"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
-                    <div className="absolute inset-0 bg-gradient-to-r from-blood/20 via-transparent to-blood/20 mix-blend-overlay" />
-                  </>
+                  <img
+                    src={selected.photo}
+                    alt={selected.name}
+                    className="h-full w-full object-cover object-top"
+                  />
                 ) : (
-                  <div className="flex h-full w-full items-center justify-center font-display text-7xl font-bold text-blood-foreground">
+                  <div className="flex h-full w-full items-center justify-center bg-blood/20 font-display text-7xl font-bold text-blood">
                     {selected.initials}
                   </div>
                 )}
               </div>
-              <div className="relative -mt-10 px-8 pb-8">
+              <div className="px-8 py-6">
                 <DialogHeader>
-                  <DialogTitle className="text-center font-display text-3xl uppercase tracking-wider drop-shadow-lg">
+                  <DialogTitle className="text-center font-display text-2xl uppercase tracking-wider text-card-foreground">
                     {selected.name}
                   </DialogTitle>
-                  <DialogDescription className="mt-2 text-center text-xs uppercase tracking-[0.25em] text-blood">
+                  <DialogDescription className="mt-1 text-center text-xs uppercase tracking-[0.25em] text-blood">
                     {selected.role}
                   </DialogDescription>
                 </DialogHeader>
                 <div className="mt-4 flex justify-center">
                   <div className="inline-flex items-center gap-2 rounded-full border border-blood/40 bg-blood/10 px-4 py-1.5 text-xs uppercase tracking-wider">
                     <Award className="h-3.5 w-3.5 text-blood" />
-                    <span className="text-foreground">{selected.rank}</span>
+                    <span className="text-card-foreground">{selected.rank}</span>
                   </div>
                 </div>
-                <p className="mt-5 text-center text-sm leading-relaxed text-muted-foreground">{selected.bio}</p>
+                <p className="mt-5 text-sm leading-relaxed text-card-foreground/80" dangerouslySetInnerHTML={{ __html: selected.bio }} />
               </div>
             </>
           )}

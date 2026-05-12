@@ -32,7 +32,7 @@ export const MODALITIES: Modality[] = [
     short: "Kai Muay Sahet",
     tagline: "Força, Ritmo e Coração.",
     description:
-      "A arte das oito armas tailandesa. Treinos intensos com técnica, condicionamento e tradição do Muay Thai.",
+      "Muaythai é um esporte de combate tailandês. Mas aqui vai além: é ferramenta de inclusão social e de qualidade de vida. Trabalho com jovens, adultos e pessoas em processo de recuperação. A base é a mesma: disciplina, postura, controle da respiração, respeito. O resultado muda rotina, comportamento e saúde.<br /><br />No treino eu ensino técnica, estratégia e progressão segura. Ajusto o exercício para cada objetivo: emagrecimento, defesa pessoal, autoestima, reinserção social. A prática cria foco, reduz ansiedade e fortalece comunidade. Não é romantizar a luta; é usar um método comprovado para transformar trajetórias.<br /><br />Se quer resultado real, não adianta só bater. Precisa de método, consistência e cuidado. É isso que eu trabalho todos os dias no ringue e fora dele. Muaythai bem aplicado salva rotinas e muda vidas.",
     logo: muayLogo,
     accentName: "gold",
   },
@@ -42,7 +42,7 @@ export const MODALITIES: Modality[] = [
     short: "Caminho da Harmonia",
     tagline: "Equilíbrio, Fluxo e Harmonia.",
     description:
-      "A arte marcial japonesa do não-conflito. Aprenda a redirecionar a força com técnica, postura e serenidade.",
+      "O Aikidô é uma arte marcial japonesa criada por Morihei Ueshiba, baseada na harmonia, disciplina e respeito. Mais do que aprender técnicas de defesa pessoal, o praticante desenvolve equilíbrio físico, controle emocional e espírito de cooperação.No Aikidô, força não é usada para destruir o adversário, mas para neutralizar conflitos de forma inteligente e consciente. É uma prática que fortalece o corpo, acalma a mente e promove evolução pessoal dentro e fora do dojo.",
     logo: aikidoLogo,
     accentName: "azul",
   },
