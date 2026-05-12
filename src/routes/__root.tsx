@@ -6,7 +6,7 @@ import {
   useRouter,
 } from "@tanstack/react-router";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ModalityProvider } from "@/components/ModalityContext";
 import { IntroSplash } from "@/components/IntroSplash";
 
@@ -75,17 +75,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
-  const [showIntro, setShowIntro] = useState(false);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    if (!sessionStorage.getItem("xogun_intro_seen")) {
-      setShowIntro(true);
-    }
-  }, []);
+  const [showIntro, setShowIntro] = useState(true);
 
   const handleDone = () => {
-    sessionStorage.setItem("xogun_intro_seen", "1");
     setShowIntro(false);
   };
 

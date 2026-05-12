@@ -27,7 +27,7 @@ export const TEACHERS: Record<ModalityId, Teacher[]> = {
       name: "Lara Cássia",
       role: "Professora",
       rank: "Faixa Marrom",
-      bio: "Atleta competidora e educadora. Lidera turmas femininas, kids e fundamentos com técnica e carinho.",
+      bio: "Atleta competidora e educadora. Lidera turmas kids e fundamentos com técnica e carinho.",
       initials: "LC",
       photo: laraImg,
     },

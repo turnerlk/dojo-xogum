@@ -22,7 +22,7 @@ export const MODALITIES: Modality[] = [
     short: "Dojo XOGUN",
     tagline: "Tradição, Técnica e Disciplina.",
     description:
-      "Na XOGUN, formamos guerreiros através do Jiu Jitsu. Aulas para todas as idades venha fazer sua aula experimental.",
+      "Na academia Dojô XOGUN, formamos guerreiros através do Jiu Jitsu. Aulas para todas as idades venha fazer sua aula experimental.",
     logo: jiuLogo,
     accentName: "blood",
   },

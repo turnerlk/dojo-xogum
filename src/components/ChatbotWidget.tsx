@@ -7,7 +7,7 @@ type Msg = { from: "bot" | "user"; text: string; cta?: boolean };
 export function ChatbotWidget() {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Msg[]>([
-    { from: "bot", text: "Oss! 🥋 Sou o assistente da XOGUN. Em que posso ajudar?" },
+    { from: "bot", text: "Oss! 🥋 Sou o assistente virtual da Dojô XOGUN. Em que posso ajudar?" },
   ]);
 
   const ask = (item: typeof QUICK[number]) => {
