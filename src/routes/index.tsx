@@ -113,7 +113,7 @@ function ProfessoresCard() {
           className="absolute"
           style={{
             top: -14,
-            left: 24,
+            left: "calc(50% - 48px)",
             zIndex: open ? 10 : 0,
             pointerEvents: open ? "auto" : "none",
           }}
