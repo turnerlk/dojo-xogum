@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader, SiteFooter } from "@/components/SiteLayout";
 import { ChatbotWidget } from "@/components/ChatbotWidget";
-import { useModality } from "@/components/ModalityContext";
+import { useModality, useModalitySlide } from "@/components/ModalityContext";
 import { Calendar, Users, MessageCircle } from "lucide-react";
 
 export const Route = createFileRoute("/")({
@@ -10,6 +10,7 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   const { modality } = useModality();
+  const slide = useModalitySlide();
 
   return (
     <div className="min-h-screen bg-background">
@@ -24,7 +25,7 @@ function Index() {
               "radial-gradient(circle at 70% 30%, color-mix(in oklab, var(--blood) 40%, transparent), transparent 50%), radial-gradient(circle at 20% 80%, color-mix(in oklab, var(--blood) 25%, transparent), transparent 60%)",
           }}
         />
-        <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-6 py-20 md:grid-cols-2 md:py-32">
+        <div key={slide.key} className={`relative mx-auto grid max-w-6xl items-center gap-10 px-6 py-20 md:grid-cols-2 md:py-32 ${slide.className}`}>
           <div>
             <div className="mb-4 inline-block rounded-full border border-blood/40 bg-blood/10 px-4 py-1 text-xs uppercase tracking-[0.25em] text-blood">
               {modality.short}
@@ -32,7 +33,7 @@ function Index() {
             <h1 className="font-display text-5xl font-bold uppercase leading-[1.15] tracking-tight text-foreground md:text-7xl md:leading-[1.1]">
               {modality.tagline}
             </h1>
-            <p className="mt-6 max-w-md text-base leading-relaxed text-muted-foreground md:text-lg">
+            <p className="mt-6 max-w-md text-base leading-relaxed text-muted-foreground [text-wrap:balance] md:text-lg">
               {modality.description}
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
@@ -83,9 +84,9 @@ function Index() {
             Pronto para entrar no <span className="text-blood">tatame</span>?
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
-            Toque no chat no canto da tela e fale direto com a gente — respondemos pelo WhatsApp.
+            Toque no chat no canto da tela e fale direto com a gente respondemos pelo WhatsApp.
           </p>
-          <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+          <div className="mt-8 flex flex-col items-center gap-4">
             <p className="text-sm text-muted-foreground">Quer saber como chegar?</p>
             <a
               href="https://www.google.com/maps/search/?api=1&query=Pra%C3%A7a+8+de+Maio+Rocha+Miranda+Rio+de+Janeiro"

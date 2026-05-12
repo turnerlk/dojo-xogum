@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { SiteHeader, SiteFooter } from "@/components/SiteLayout";
 import { ChatbotWidget } from "@/components/ChatbotWidget";
-import { useModality } from "@/components/ModalityContext";
+import { useModality, useModalitySlide } from "@/components/ModalityContext";
 import { Award } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { TEACHERS, type Teacher } from "@/data/professores";
@@ -13,6 +13,7 @@ export const Route = createFileRoute("/professores")({
 
 function ProfessoresPage() {
   const { modality } = useModality();
+  const slide = useModalitySlide();
   const teachers = TEACHERS[modality.id];
   const [selected, setSelected] = useState<Teacher | null>(null);
 
@@ -27,12 +28,16 @@ function ProfessoresPage() {
           <h1 className="font-display text-4xl uppercase tracking-tight text-foreground md:text-6xl">
             Professores <span className="text-blood">XOGUN</span>
           </h1>
-          <p className="mt-3 text-sm text-muted-foreground">Clique no nome do professor para ver a foto e a bio.</p>
+          <p className="mt-3 text-sm text-muted-foreground">Clique no card para ver a foto e a bio completa.</p>
         </div>
 
-        <div className="grid gap-6 md:gap-8 md:grid-cols-2">
+        <div key={slide.key} className={`grid gap-6 md:gap-8 md:grid-cols-2 ${slide.className}`}>
           {teachers.map((t) => (
-            <article key={t.name} className="group flex flex-col gap-5 rounded-2xl border border-border bg-card p-6 transition-all hover:-translate-y-1 hover:border-blood/60 hover:shadow-blood md:flex-row md:gap-7 md:p-8">
+            <article
+              key={t.name}
+              onClick={() => setSelected(t)}
+              className="group flex cursor-pointer flex-col gap-5 rounded-2xl border border-border bg-card p-6 transition-all hover:-translate-y-1 hover:border-blood/60 hover:shadow-blood md:flex-row md:gap-7 md:p-8"
+            >
               <div className="flex h-24 w-24 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br from-blood to-blood/60 font-display text-3xl font-bold text-blood-foreground md:h-32 md:w-32">
                 {t.photo ? (
                   <img src={t.photo} alt={t.name} loading="eager" decoding="async" fetchPriority="high" className="h-full w-full object-cover" />
@@ -41,13 +46,9 @@ function ProfessoresPage() {
                 )}
               </div>
               <div className="flex-1">
-                <button
-                  type="button"
-                  onClick={() => setSelected(t)}
-                  className="text-left font-display text-xl uppercase tracking-wider text-foreground transition-colors hover:text-blood focus:outline-none focus-visible:text-blood md:text-2xl"
-                >
+                <p className="font-display text-xl uppercase tracking-wider text-foreground transition-colors group-hover:text-blood md:text-2xl">
                   {t.name}
-                </button>
+                </p>
                 <p className="text-xs uppercase tracking-wider text-blood md:text-sm">{t.role}</p>
                 <div className="mt-2 inline-flex items-center gap-2 rounded-full border border-border bg-secondary px-3 py-1 text-xs md:text-sm">
                   <Award className="h-3 w-3 text-blood md:h-4 md:w-4" />

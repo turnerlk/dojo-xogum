@@ -12,7 +12,7 @@ export type Modality = {
   tagline: string;
   description: string;
   logo: string;
-  accentName: string; // for "blood" word swap
+  accentName: string;
 };
 
 export const MODALITIES: Modality[] = [
@@ -22,7 +22,7 @@ export const MODALITIES: Modality[] = [
     short: "Dojo XOGUN",
     tagline: "Tradição, Técnica e Disciplina.",
     description:
-      "Na XOGUN, formamos guerreiros através do Jiu Jitsu. Aulas para todas as idades — venha fazer sua aula experimental.",
+      "Na XOGUN, formamos guerreiros através do Jiu Jitsu. Aulas para todas as idades venha fazer sua aula experimental.",
     logo: jiuLogo,
     accentName: "blood",
   },
@@ -50,6 +50,7 @@ export const MODALITIES: Modality[] = [
 
 type Ctx = {
   modality: Modality;
+  direction: "left" | "right";
   setModalityId: (id: ModalityId) => void;
 };
 
@@ -57,6 +58,7 @@ const ModalityCtx = createContext<Ctx | null>(null);
 
 export function ModalityProvider({ children }: { children: ReactNode }) {
   const [id, setId] = useState<ModalityId>("jiujitsu");
+  const [direction, setDirection] = useState<"left" | "right">("right");
 
   useEffect(() => {
     if (typeof document !== "undefined") {
@@ -66,8 +68,15 @@ export function ModalityProvider({ children }: { children: ReactNode }) {
 
   const modality = MODALITIES.find((m) => m.id === id) ?? MODALITIES[0];
 
+  const handleSetModalityId = (newId: ModalityId) => {
+    const currentIndex = MODALITIES.findIndex((m) => m.id === id);
+    const newIndex = MODALITIES.findIndex((m) => m.id === newId);
+    setDirection(newIndex >= currentIndex ? "right" : "left");
+    setId(newId);
+  };
+
   return (
-    <ModalityCtx.Provider value={{ modality, setModalityId: setId }}>
+    <ModalityCtx.Provider value={{ modality, direction, setModalityId: handleSetModalityId }}>
       {children}
     </ModalityCtx.Provider>
   );
@@ -77,4 +86,12 @@ export function useModality() {
   const ctx = useContext(ModalityCtx);
   if (!ctx) throw new Error("useModality must be inside ModalityProvider");
   return ctx;
+}
+
+export function useModalitySlide() {
+  const { modality, direction } = useModality();
+  return {
+    key: modality.id,
+    className: direction === "right" ? "slide-from-right" : "slide-from-left",
+  };
 }

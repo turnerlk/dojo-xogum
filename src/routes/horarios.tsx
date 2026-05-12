@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteHeader, SiteFooter } from "@/components/SiteLayout";
 import { ChatbotWidget } from "@/components/ChatbotWidget";
-import { useModality } from "@/components/ModalityContext";
+import { useModality, useModalitySlide } from "@/components/ModalityContext";
 import { CalendarPlus } from "lucide-react";
 import { GROUPS } from "@/data/horarios";
 import { buildGoogleCalendarUrl } from "@/lib/calendar";
@@ -12,6 +12,7 @@ export const Route = createFileRoute("/horarios")({
 
 function HorariosPage() {
   const { modality } = useModality();
+  const slide = useModalitySlide();
   const groups = GROUPS[modality.id];
 
   return (
@@ -30,7 +31,7 @@ function HorariosPage() {
           </p>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2">
+        <div key={slide.key} className={`grid gap-6 md:grid-cols-2 ${slide.className}`}>
           {groups.map((g) => (
             <div
               key={g.title}
