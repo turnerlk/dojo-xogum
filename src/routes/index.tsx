@@ -73,7 +73,7 @@ function ProfessoresCard() {
           onClick={() => setSelected(null)}
         >
           <div
-            className="animate-in zoom-in-90 fade-in duration-200 relative w-72 overflow-hidden rounded-2xl border border-blood/50 bg-zinc-950 shadow-[0_0_80px_color-mix(in_oklab,var(--blood)_40%,transparent)]"
+            className="animate-in zoom-in-90 fade-in duration-200 relative w-72 overflow-hidden rounded-2xl border border-blood/50 bg-card shadow-[0_0_80px_color-mix(in_oklab,var(--blood)_40%,transparent)]"
             onClick={(e: { stopPropagation(): void }) => e.stopPropagation()}
           >
             {selected.photo ? (
@@ -121,7 +121,7 @@ function ProfessoresCard() {
             return (
               <div
                 key={teacher.name}
-                className="absolute top-0 left-0 w-24 overflow-hidden rounded-xl border border-blood/40 bg-zinc-900 shadow-2xl transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)]"
+                className="absolute top-0 left-0 w-24 overflow-hidden rounded-xl border border-blood/40 bg-card shadow-2xl transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)]"
                 style={{
                   height: 130,
                   transitionDelay: open
